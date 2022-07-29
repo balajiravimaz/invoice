@@ -65,57 +65,57 @@ if (isset($_SESSION['email'])) { ?>
             </div>
 
             <div class="items">
-                <form name="invoice">
-                    <table class="table">
-                        <thead class="bg-secondary">
-                            <tr>
-                                <th><input type="text" value="Item Description" readonly></th>
-                                <th><input type="text" value="Qty" readonly></th>
-                                <th><input type="text" value="Amount" readonly></th>
-                                <th><input type="text" value="Rate" readonly></th>
-                            </tr>
-                        </thead>
-                        <tbody class="tbdy">
-                            <tr style="border-bottom: 1px solid #ddd;">
-                                <td>
-                                    <textarea placeholder="Enter items name"></textarea>
-                                </td>
-                                <td>
-                                    <input type="number" placeholder="qty" name="qty[]" class="qty" value="1">
-                                </td>
-                                <td>
-                                    <input type="number" placeholder="Amount" name="amt[]"  class="amt">
-                                </td>
-                                <td align="center">
-                                    <span class="rate">0.00</span>
-                                </td>
-                            </tr>
-                            <tr style="border-bottom: 1px solid #ddd;">
-                                <td>
-                                    <textarea placeholder="Enter items name"></textarea>
-                                </td>
-                                <td>
-                                    <input type="number" placeholder="qty" name="qty[]" class="qty" value="1">
-                                </td>
-                                <td>
-                                    <input type="number" placeholder="Amount" name="amt[]"  class="amt">
-                                </td>
-                                <td align="center">
-                                    <span class="rate">0.00</span>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="newitem">
-                                        <a href="" id="add"><span class="plus">&plus;</span> Add new item</a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </form>
+
+                <table class="table" id="invoice">
+                    <thead class="bg-secondary">
+                        <tr>
+                            <th><input type="text" value="Item Description" readonly></th>
+                            <th><input type="text" value="Qty" readonly></th>
+                            <th><input type="text" value="Amount" readonly></th>
+                            <th><input type="text" value="Rate" readonly></th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbdy">
+
+                        <tr style="border-bottom: 1px solid #ddd;">
+                            <td>
+                                <textarea placeholder="Enter items name"></textarea>
+                            </td>
+                            <td>
+                                <input type="number" placeholder="qty" name="" class="qty" value="1">
+                            </td>
+                            <td>
+                                <input type="number" placeholder="Amount" name="" class="amt">
+                            </td>
+                            <td align="center">
+                                <span class="rate">0.00</span>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #ddd;">
+                            <td>
+                                <textarea placeholder="Enter items name"></textarea>
+                            </td>
+                            <td>
+                                <input type="number" placeholder="qty" name="" class="qty" value="1">
+                            </td>
+                            <td>
+                                <input type="number" placeholder="Amount" name="" class="amt">
+                            </td>
+                            <td align="center">
+                                <span class="rate">0.00</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="newitem">
+                                    <a href="" id="add"><span class="plus">&plus;</span> Add new item</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

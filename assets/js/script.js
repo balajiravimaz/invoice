@@ -1,12 +1,23 @@
 const add = document.getElementById("add");
+const table = document.getElementById("invoice");
 
 
-let form = document.forms.invoice;
+table.addEventListener("change", function(e){
+    let row = e.target.parentElement.parentElement;
+    let qty = row.querySelector(".qty").value;
+    let amt = row.querySelector(".amt").value;
+    let result = row.querySelector(".rate");
 
-console.log(form.qty);
+    result.innerHTML = qty * amt;
 
-form.qty.oninput = calculate;
-form.amt.oninput = calculate;
+})
+
+// let form = document.forms.invoice;
+
+// console.log(form.qty);
+
+// form.qty.oninput = calculate;
+// form.amt.oninput = calculate;
 
 function calculate() {
     let qty = +form.qty.value;
@@ -64,18 +75,15 @@ add.addEventListener("click", function (e) {
     const qty = document.createElement("input");
     qty.type = "number";
     qty.placeholder = "qty";
-    qty.name="qty";
+    qty.name = "qty";
     qty.className = "qty";
     qty.value = "1";
-
+            
     const amt = document.createElement("input");
     amt.type = "number";
     amt.placeholder = "Amount";
     amt.className = "amnt";
-    amt.name="amt";
-
-    form.qty.oninput = calculate;
-    form.amt.oninput = calculate;
+    amt.name = "amt";
 
     const rate = document.createElement("span");
     rate.className = "rate";
@@ -102,6 +110,7 @@ add.addEventListener("click", function (e) {
     tbody.appendChild(tr);
 
 })
+
 // {/* <textarea name="" id="" cols="30" rows="10" placeholder="Enter items name"></textarea>
 // </td>
 // <td>
