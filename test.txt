@@ -1,0 +1,14 @@
+require_once "vendor/autoload.php";
+
+use Dompdf\Dompdf;
+
+
+$dompdf = new Dompdf();
+
+$dompdf->loadHtml('<h1>Welcome to CodexWorld.com</h1>'); 
+ 
+$dompdf->setPaper('A4', 'portrait'); 
+ 
+$dompdf->render(); 
+
+$dompdf->stream("test.pdf", array("Attachment" => 0));
