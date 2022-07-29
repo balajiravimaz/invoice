@@ -12,12 +12,6 @@ table.addEventListener("change", function(e){
 
 })
 
-// let form = document.forms.invoice;
-
-// console.log(form.qty);
-
-// form.qty.oninput = calculate;
-// form.amt.oninput = calculate;
 
 function calculate() {
     let qty = +form.qty.value;
@@ -33,26 +27,6 @@ function calculate() {
 }
 
 
-
-// const inputs = [...document.querySelectorAll("input")]
-// const reducer = (accumulator, currentValue) => accumulator + currentValue;
-
-// const getTotal = () => {
-//   const values = inputs.map(input => Number(input.value));
-//   const total = values.reduce(reducer);
-//   console.log(total);
-// }
-
-// inputs.forEach(input => input.addEventListener('input', getTotal));
-
-
-// tbdy.addEventListener("change", function (e) {
-//     let sum = e.target.value;
-//     if (!isNaN(e.target.value)) {
-//         sum = sum * Number.parseFloat(e.target.value);        
-//         console.log(sum);
-//     }        
-// })
 
 
 function removeTd(e) {
@@ -82,7 +56,7 @@ add.addEventListener("click", function (e) {
     const amt = document.createElement("input");
     amt.type = "number";
     amt.placeholder = "Amount";
-    amt.className = "amnt";
+    amt.className = "amt";
     amt.name = "amt";
 
     const rate = document.createElement("span");

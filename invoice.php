@@ -91,20 +91,6 @@ if (isset($_SESSION['email'])) { ?>
                                 <span class="rate">0.00</span>
                             </td>
                         </tr>
-                        <tr style="border-bottom: 1px solid #ddd;">
-                            <td>
-                                <textarea placeholder="Enter items name"></textarea>
-                            </td>
-                            <td>
-                                <input type="number" placeholder="qty" name="" class="qty" value="1">
-                            </td>
-                            <td>
-                                <input type="number" placeholder="Amount" name="" class="amt">
-                            </td>
-                            <td align="center">
-                                <span class="rate">0.00</span>
-                            </td>
-                        </tr>
                     </tbody>
                     <tbody>
                         <tr>
@@ -112,6 +98,23 @@ if (isset($_SESSION['email'])) { ?>
                                 <div class="newitem">
                                     <a href="" id="add"><span class="plus">&plus;</span> Add new item</a>
                                 </div>
+                            </td>
+                            <td align="right" colspan="2">
+                                <b>Sub Total</b>
+                            </td>
+                            <td align="right">
+                                <p class="sub_total"><b>2500.00</b></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right" colspan="2">
+                                <b>CGST(%)</b>
+                            </td>
+                            <td align="right">
+                                <p class="sub_total"><b><input type="number"></b></p>
+                            </td>
+                            <td>
+                                <p class="tax"><b>250</b></p>
                             </td>
                         </tr>
                     </tbody>
