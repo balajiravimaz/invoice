@@ -18,11 +18,11 @@ if (isset($_SESSION['email'])) {
         <?php if (!empty($result)) : ?>
             <table class="table table-bordered ">
                 <thead class="bg-dark">
-                    <th class="text-white">S.no</th>
-                    <th class="text-white">Invoice No</th>
-                    <th class="text-white">Date</th>
-                    <th class="text-white">Due Date</th>
-                    <th class="text-white">Action</th>
+                    <th class="text-white text-center" >S.no</th>
+                    <th class="text-white text-center" >Invoice No</th>
+                    <th class="text-white text-center" >Date</th>
+                    <th class="text-white text-center" >Due Date</th>
+                    <th class="text-white text-center" >Action</th>
                 </thead>
                 <tbody>
                     <?php $i = 1;
@@ -33,7 +33,7 @@ if (isset($_SESSION['email'])) {
                             <td><?php echo $data['invoice_date']; ?></td>
                             <td><?php echo $data['due_date']; ?></td>
                             <td>
-                                <a href="print.php?id=<?php echo $data['invoice_id'] ?>" class="btn btn-sm btn-success">Save</a>
+                                <a href="print.php?id=<?php echo $data['invoice_id'] ?>" target="_blank" class="btn btn-sm btn-success">Save</a>
                                 <a href="edit.php?id=<?php echo $data['invoice_id'] ?>" class="btn btn-sm btn-warning">Edit</a>
                                 <a href="delete.php?id=<?php echo $data['invoice_id'] ?>" class="btn btn-sm btn-danger">Delete</a>
 

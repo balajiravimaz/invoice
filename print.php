@@ -5,29 +5,33 @@ require_once "vendor/autoload.php";
 
 use Dompdf\Dompdf;
 
-if (isset($_GET['id'])) {
-    require_once "class/Database.php";
+if (isset($_SESSION['email'])) {
+    if (isset($_GET['id'])) {
+        require_once "class/Database.php";
 
-    $db = new Database();
+        $db = new Database();
 
-    $email = $_SESSION['email'];
+        $email = $_SESSION['email'];
 
-    $db->query("select id from users where email =  '$email' ");
-    $user = $db->resultset();
-    $user_id = $user[0]['id'];
+        $db->query("select id from users where email =  '$email' ");
+        $user = $db->resultset();
+        $user_id = $user[0]['id'];
 
-    $dompdf = new Dompdf();
+        $inv_id = $_GET['id'];
 
-    
-    $db->query("SELECT * FROM `address` join billing on address.invoice_id = billing.invoice_id join total on billing.invoice_id = total.invoice_id join notes on total.invoice_id = notes.invoice_id where address.user_id = $user_id; ");
-    $address = $db->resultset();
-    $invoice_id = $address[0]['invoice_id'];
+        $dompdf = new Dompdf();
 
 
-    $db->query("SELECT * from items where invoice_id = '$invoice_id' ");
-    $items = $db->resultset();
+        $db->query("SELECT * FROM `address` join billing on address.invoice_id = billing.invoice_id join total on billing.invoice_id = total.invoice_id join notes on total.invoice_id = notes.invoice_id where address.invoice_id = :invId ;");
+        $db->bind(":invId",$inv_id);
+        $address = $db->resultset();
 
-    $html = '
+
+        $db->query("SELECT * from items where invoice_id = :invId ");
+        $db->bind(":invId", $inv_id);
+        $items = $db->resultset();
+
+        $html = '
     <style>
     p{
         color:#454545;
@@ -95,19 +99,19 @@ if (isset($_GET['id'])) {
 
         <table>
         <tr>
-        <td><h4>'.$address[0]['name'].'</h4></td>
-        <td align="right"><h1>'.$address[0]['title'].'</h1></td>                
+        <td><h4>' . $address[0]['name'] . '</h4></td>
+        <td align="right"><h1>' . $address[0]['title'] . '</h1></td>                
         </tr>        
         <tr>
-        <td><p>'.$address[0]['c_address'].'</p></td>
+        <td><p>' . $address[0]['c_address'] . '</p></td>
         <td></td>
         </tr>
         <tr>
-        <td><p>'.$address[0]['city'].'</p></td>
+        <td><p>' . $address[0]['city'] . '</p></td>
         <td></td>
         </tr>
         <tr>
-        <td><p>'.$address[0]['country'].'</p></td>
+        <td><p>' . $address[0]['country'] . '</p></td>
         <td></td>
         </tr>
         </table>
@@ -117,19 +121,19 @@ if (isset($_GET['id'])) {
         <h4><b>Billing To: </b></h4>
         <table style="margin-top:20px;">
         <tr>
-        <td><h4>'.$address[0]['b_name'].'</h4></td>
-        <td align="right"><p class="inlne">Invoice:</p> <p class="p">'.$address[0]['invoice_id'].'</p></td>
+        <td><h4>' . $address[0]['b_name'] . '</h4></td>
+        <td align="right"><p class="inlne">Invoice:</p> <p class="p">' . $address[0]['invoice_id'] . '</p></td>
         </tr>
         <tr>
-        <td><p>'.$address[0]['b_address'].'</p></td>
-        <td align="right"><p class="inlne">Invoice Date:</p> <p class="p">'.$address[0]['invoice_date'].'</p></td>
+        <td><p>' . $address[0]['b_address'] . '</p></td>
+        <td align="right"><p class="inlne">Invoice Date:</p> <p class="p">' . $address[0]['invoice_date'] . '</p></td>
         </tr>
         <tr>
-        <td><p>'.$address[0]['b_city'].'</p></td>
-        <td align="right"><p class="inlne">Due Date:</p> <p class="p">'.$address[0]['due_date'].'</p></td>
+        <td><p>' . $address[0]['b_city'] . '</p></td>
+        <td align="right"><p class="inlne">Due Date:</p> <p class="p">' . $address[0]['due_date'] . '</p></td>
         </tr>
         <tr>
-        <td><p>'.$address[0]['b_country'].'</p></td>        
+        <td><p>' . $address[0]['b_country'] . '</p></td>        
         </tr>
         </table>
         <br>
@@ -144,43 +148,43 @@ if (isset($_GET['id'])) {
         </thead>
         <tbody>';
 
-        foreach($items as $data){
+        foreach ($items as $data) {
             $html .= '
             <tr style="border-bottom: 1px solid #ddd;">
             <td align="center">
-            <p>'.$data['item'].'</p>
+            <p>' . $data['item'] . '</p>
             </td>
             <td align="center">
-                <p>'.$data['qty'].'</p>
+                <p>' . $data['qty'] . '</p>
             </td>
             <td align="center">
-                <p>'.$data['amount'].'</p>
+                <p>' . $data['amount'] . '</p>
             </td>
             <td align="right">
-                <p>'.$data['rate'].'</p>
+                <p>' . $data['rate'] . '</p>
             </td>
             </tr>  
             ';
         }
 
-       $html .='
+        $html .= '
         <tr>
         <td align="right" colspan="3">
             <b style="color:#000;">Sub Total</b>
         </td>
         <td align="right">
-            <p>'.$address[0]['sub_total'].'.00</p>
+            <p><b>' . $address[0]['sub_total'] . '.00</b></p>
         </td>
     </tr>
     <tr>
         <td align="right" colspan="3">
             <div class="d-flex justify-content-end">
-                <b style="color:#000";>CGST(%) + IGST(%)</b>
-                <span style="color:#000;"><b>'.$address[0]['gst'].'</b></span>
+                <b style="color:#000";>CGST(%) + IGST(%) : </b>
+                <span style="color:#000;"><b>' . $address[0]['gst'] . '</b></span>
             </div>
         </td>
         <td align="right">            
-            <p>'.$address[0]['gst_amount'].'.00</p>
+            <p><b>' . $address[0]['gst_amount'] . '.00</b></p>
         </td>
     </tr>
     <tr class="total">
@@ -188,27 +192,28 @@ if (isset($_GET['id'])) {
             <p><b>Total</b></p>
         </td>
         <td align="right" style="background: #efefef;">
-            <p>'.$address[0]['total'].'.00</p>
+            <p><b>' . $address[0]['total'] . '.00</b></p>
         </td>
     </tr>
         </tbody>
         </table>
         <br>
         <h5 style="margin-bottom: 0px;"><b>Notes:</b></h5>
-        <p style="margin-bottom: 15px;">It was great doing business with you.</p>        
+        <p style="margin-bottom: 15px;">'.$address[0]['notes'].'</p>        
         <h5 style="margin-bottom: 15px;"><b>Terms and Conditions</b></h5>    
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,</p>    
         <br>
         <p><b>Please make the payment by the due date.</b></p>
         ';
 
-    $dompdf->loadHtml($html);
+        $dompdf->loadHtml($html);
 
 
 
-    $dompdf->setPaper('A4', 'portrait');
+        $dompdf->setPaper('A4', 'portrait');
 
-    $dompdf->render();
+        $dompdf->render();
 
-    $dompdf->stream("test.pdf", array("Attachment" => 0));
+        $dompdf->stream("test.pdf", array("Attachment" => 0));
+    }
 }

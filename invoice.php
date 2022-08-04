@@ -52,12 +52,12 @@ if (isset($_SESSION['email'])) {
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="row">
+                        <!-- <div class="row">
                             <label for="invoiceno" class="col-sm-6 col-form-label">Invoice#</label>
                             <div class="col-sm-6">
                                 <input type="text" id="invoiceno" placeholder="INV-12" name="invno" readonly required="required">
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row">
                             <label for="invDate" class="col-sm-6 col-form-label">Invoice Date</label>
                             <div class="col-sm-6">
@@ -78,10 +78,10 @@ if (isset($_SESSION['email'])) {
                     <table class="table" id="invoice">
                         <thead class="bg-secondary">
                             <tr>
-                                <th><input type="text" value="Item Description" readonly></th>
-                                <th><input type="text" value="Qty" readonly></th>
-                                <th><input type="text" value="Amount" readonly></th>
-                                <th><input type="text" value="Rate" readonly></th>
+                                <th class="text-white">Item Description</th>
+                                <th class="text-white">quantity</th>
+                                <th class="text-white">Amount</th>
+                                <th class="text-white">Rate</th>
                             </tr>
                         </thead>
                         <tbody class="tbdy">

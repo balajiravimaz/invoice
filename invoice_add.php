@@ -3,6 +3,7 @@ session_start();
 require_once "class/Database.php";
 
 
+if (isset($_SESSION['email'])) {
 if (isset($_POST['save'])) {
 
     $db = new Database();
@@ -18,10 +19,11 @@ if (isset($_POST['save'])) {
     $db->query("select inv_id from inv_autogen where id = 1");
     $inv_user = $db->resultset();
     $inv_id =$inv_user[0]['inv_id'];
-
-    $auto_inc = $inv_id++;
-
-    $db->query("update inv_id set inv_id ='$auto_inc' where id = '1' ");
+    
+    $auto_inc = ++$inv_id;
+    
+    $db->query("update inv_autogen set inv_id ='$auto_inc' where id = '1' ");
+    $db->execute();
 
     $cname = ucfirst($_POST['cname']);
     $caddress = $_POST['caddress'];
@@ -117,6 +119,8 @@ if (isset($_POST['save'])) {
     } else {
         echo "<script>alert('Failed')</script>";
     }
-} else {
+} 
+}
+else {
     header("Location: index.php");
 }
