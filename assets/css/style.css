@@ -14,6 +14,7 @@ body {
   padding: 15px;
   margin: 50px auto 20px;
 }
+
 .signin {
   max-width: 550px;
   margin: 50px auto 20px;
@@ -67,6 +68,12 @@ textarea:focus {
   max-width: 900px;
   margin: 0 auto;
 }
+
+.btn-grp{
+  max-width: 900px !important; 
+  margin: 0 auto;
+}
+
 input::placeholder {
   font-size: 14px;
   font-family: inherit;
@@ -80,14 +87,14 @@ table input {
   background: transparent !important;
 }
 table th {
-  text-align: center;
+  text-align: right;
 }
 table th input {
   color: #fff !important;
-  text-align: center;
+  text-align: right;
 }
 table td input {
-  text-align: center;
+  text-align: right;
 }
 textarea {
   height: 60px;
@@ -124,16 +131,28 @@ a {
   align-items: center;
   font-size: 14px;
   justify-content: center;
-  top: 25%;  
+  top: 25%;
 
   /* display: none; */
 }
-table tr{
+table tr {
   position: relative;
+  
 }
-.rate{
+
+.rate {
   font-size: 15px;
   font-weight: 500;
-  text-align: center;
-  display: block;
+  text-align: right;  
+}
+.tax,
+.total{
+  font-weight: bolder;
+}
+.table>:not(caption)>*>*{
+  border-bottom-width: 0px !important;
+}
+.md-table{
+  max-width: 800px;
+  margin: 90px auto 0 !important;
 }

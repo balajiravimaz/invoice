@@ -4,7 +4,7 @@ class Database
 	private $host      = "localhost";
 	private $user      = "root";
 	private $pass      = "";
-	private $dbname    = "practice";
+	private $dbname    = "invoice";
 
 	private $dbh; //Database Handler
 	private $error;
