@@ -113,6 +113,8 @@ add.addEventListener("click", function (e) {
 
 })
 
+let name = items
+
 document.querySelectorAll(".close").forEach(item => {
     item.addEventListener("click", function (e) {
         removeTd(e);
